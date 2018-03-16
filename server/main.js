@@ -6,6 +6,27 @@
 'use strict';
 let PythonShell = require('python-shell');
 let cmd=require('node-cmd');
+let SSH = require('simple-ssh');
+let tunnel = require('tunnel-ssh');
+
+let ssh = new SSH({
+  host: '10.10.2.2',
+  user: 'pi',
+  pass: 'manatee'
+});
+
+let tunnel_config = {
+  username:'pi',
+  Password:'manatee',
+  host:'10.10.2.2',
+  port:22,
+  dstHost:'10.10.2.2',
+  dstPort:8003,
+  localHost:'127.0.0.1',
+  localPort: 8003
+};
+
+
 
 const express = require('express');
 const app = express();
@@ -19,6 +40,23 @@ app.get('/', (req, res) =>{
   res.send('Hello World!')
 });
 
+app.get('/busca-connect', (req, res)=>{
+
+  //ssh.exec('sudo python ~/m.py', {
+  //  out: (stdout)=>{
+  //    //console.log(stdout);
+  //    res.json({result:stdout});
+  //  }
+  //}).start();
+
+  tunnel(tunnel_config, function (error, server) {
+    //....
+    console.error(error);
+    console.info("server:", server);
+
+  });
+
+});
 
 app.get('/control-led2', (req, res)=>{
 
@@ -32,6 +70,27 @@ app.get('/control-led2', (req, res)=>{
 
     }
   });
+
+});
+
+app.get('/busca', (req, res)=>{
+
+  cmd.get(
+    'sudo python ~/busca.py',
+    function(err, data, stderr){
+      if(err){
+        res.json({msg:"could not complete because of an error", err:err});
+      }
+      else{
+
+        console.log('data is : ',data);
+        console.log('stderr is : ',stderr);
+
+        res.json({msg:"command successful", data:data});
+
+      }
+    }
+  );
 
 });
 
