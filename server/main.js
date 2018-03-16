@@ -45,22 +45,22 @@ app.get('/', (req, res) =>{
 
 app.get('/busca-connect', (req, res)=>{
 
-  //cmd.get(
-  //  'ssh -L 8003:pi@10.10.2.2:8003 127.0.0.1',
-  //  function(err, data, stderr){
-  //    if(err){
-  //      res.json({msg:"could not complete because of an error", err:err});
-  //    }
-  //    else{
-  //
-  //      console.log('data is : ',data);
-  //      console.log('stderr is : ',stderr);
-  //
-  //      res.json({msg:"command successful", data:data});
-  //
-  //    }
-  //  }
-  //);
+  cmd.get(
+    'ssh -L 8003:pi@10.10.2.2:8003 127.0.0.1',
+    function(err, data, stderr){
+      if(err){
+        res.json({msg:"could not complete because of an error", err:err});
+      }
+      else{
+
+        console.log('data is : ',data);
+        console.log('stderr is : ',stderr);
+
+        res.json({msg:"command successful", data:data});
+
+      }
+    }
+  );
 
   //ssh.exec('sudo python ~/m.py', {
   //  out: (stdout)=>{
@@ -79,11 +79,11 @@ app.get('/busca-connect', (req, res)=>{
 
 
   //const openSshTunnel = require('open-ssh-tunnel');
-  openATunnel().then((resolved)=>{
-    console.log(resolved);
-  }).catch(exc=>{
-    console.error(exc);
-  });
+  //openATunnel().then((resolved)=>{
+  //  console.log(resolved);
+  //}).catch(exc=>{
+  //  console.error(exc);
+  //});
 
 });
 
