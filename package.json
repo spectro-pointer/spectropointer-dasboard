@@ -18,6 +18,7 @@
   "homepage": "https://github.com/spectro-pointer/spectropointer-dasboard#readme",
   "dependencies": {
     "express": "^4.16.3",
+    "node-cmd": "^3.0.0",
     "python-shell": "^0.5.0"
   }
 }
