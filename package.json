@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/spectro-pointer/spectropointer-dasboard/issues"
   },
-  "homepage": "https://github.com/spectro-pointer/spectropointer-dasboard#readme"
+  "homepage": "https://github.com/spectro-pointer/spectropointer-dasboard#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
