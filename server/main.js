@@ -14,18 +14,23 @@ app.get('/', (req, res) =>{
   res.send('Hello World!')
 });
 
-app.get('/control-led', (req, res)=>{
 
-  //PythonShell.run('~/led.py', {}, (err)=>{
-  //  if (err) {
-  //    //throw err
-  //    res.json({msg:"could not complete because of an error", err:err});
-  //  }
-  //  else{
-  //    res.json({msg:"command successful"});
-  //
-  //  }
-  //});
+app.get('/control-led2', (req, res)=>{
+
+  PythonShell.run('~/led.py', {}, (err)=>{
+    if (err) {
+      //throw err
+      res.json({msg:"could not complete because of an error", err:err});
+    }
+    else{
+      res.json({msg:"command successful"});
+
+    }
+  });
+
+});
+
+app.get('/control-led', (req, res)=>{
 
   cmd.get(
     'sudo python ~/led.py',
