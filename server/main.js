@@ -9,6 +9,9 @@ let cmd=require('node-cmd');
 let SSH = require('simple-ssh');
 let tunnel = require('tunnel-ssh');
 
+const openSshTunnel = require('open-ssh-tunnel');
+
+
 let ssh = new SSH({
   host: '10.10.2.2',
   user: 'pi',
@@ -66,15 +69,48 @@ app.get('/busca-connect', (req, res)=>{
   //  }
   //}).start();
 
-  tunnel(tunnel_config, function (error, server) {
-    //....
-    console.error(error);
-    console.info("server:", server);
+  //tunnel(tunnel_config, function (error, server) {
+  //  //....
+  //  console.error(error);
+  //  console.info("server:", server);
+  //
+  //
+  //});
 
 
+  //const openSshTunnel = require('open-ssh-tunnel');
+  openATunnel().then((resolved)=>{
+    console.log(resolved);
+  }).catch(exc=>{
+    console.error(exc);
   });
 
 });
+
+async function openATunnel() {
+  const server = await openSshTunnel({
+    host: '10.10.2.2',
+    username: 'pi',
+    password: 'manatee',
+    srcPort: 8003,
+    srcAddr: '127.0.0.1',
+    dstPort: 8003,
+    dstAddr: '10.10.3.103',
+    readyTimeout: 1000,
+    forwardTimeout: 1000,
+    localPort: 8003,
+    localAddr: '127.0.0.1'
+  });
+
+  // you can now connect to your
+  // forwarded tcp port!
+
+  console.log("opened!");
+
+  // later, when you want to close the tunnel
+  server.close();
+}
+
 
 app.get('/control-led2', (req, res)=>{
 
