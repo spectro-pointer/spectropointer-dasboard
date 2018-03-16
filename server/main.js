@@ -10,6 +10,11 @@ let cmd=require('node-cmd');
 const express = require('express');
 const app = express();
 
+app.get('*', (req, res, next) =>{
+  console.log('url: ', req.url);
+  next();
+});
+
 app.get('/', (req, res) =>{
   res.send('Hello World!')
 });
