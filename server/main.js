@@ -18,12 +18,12 @@ let ssh = new SSH({
 let tunnel_config = {
   username:'pi',
   Password:'manatee',
-  host:'10.10.2.2',
-  port:22,
+  host:'10.10.3.103',
+  port:8003,
   dstHost:'10.10.2.2',
   dstPort:8003,
   localHost:'127.0.0.1',
-  localPort: 8003
+  //localPort: 80
 };
 
 
@@ -42,6 +42,23 @@ app.get('/', (req, res) =>{
 
 app.get('/busca-connect', (req, res)=>{
 
+  //cmd.get(
+  //  'ssh -L 8003:pi@10.10.2.2:8003 127.0.0.1',
+  //  function(err, data, stderr){
+  //    if(err){
+  //      res.json({msg:"could not complete because of an error", err:err});
+  //    }
+  //    else{
+  //
+  //      console.log('data is : ',data);
+  //      console.log('stderr is : ',stderr);
+  //
+  //      res.json({msg:"command successful", data:data});
+  //
+  //    }
+  //  }
+  //);
+
   //ssh.exec('sudo python ~/m.py', {
   //  out: (stdout)=>{
   //    //console.log(stdout);
@@ -53,6 +70,7 @@ app.get('/busca-connect', (req, res)=>{
     //....
     console.error(error);
     console.info("server:", server);
+
 
   });
 
